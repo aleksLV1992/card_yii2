@@ -1,0 +1,13 @@
+.nessy/
+vendor/
+runtime/
+web/assets/
+.env
+*.log
+.DS_Store
+Thumbs.db
+.idea/
+*.swp
+*.swo
+*~
+composer.lock

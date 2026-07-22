@@ -1,0 +1,39 @@
+services:
+  php:
+    image: php:8.4-fpm
+    container_name: yii2-php
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+      - ./config/php.ini:/usr/local/etc/php/conf.d/custom.ini
+    networks:
+      - yii2-network
+    depends_on:
+      - composer
+
+  composer:
+    image: composer:2.7
+    container_name: yii2-composer
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - yii2-network
+    command: ["install", "--ignore-platform-reqs", "--no-interaction"]
+
+  nginx:
+    image: nginx:alpine
+    container_name: yii2-nginx
+    ports:
+      - "8888:80"
+    volumes:
+      - ./:/var/www/html
+      - ./config/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+    networks:
+      - yii2-network
+
+networks:
+  yii2-network:
+    driver: bridge

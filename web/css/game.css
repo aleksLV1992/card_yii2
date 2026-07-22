@@ -1,0 +1,110 @@
+:root {
+    --top-bg-color: #27ae60;
+    --top-bg-hover: #2ecc71;
+    --bottom-bg-color: #3498db;
+    --card-width: 100px;
+    --card-height: 140px;
+    --card-gap: 15px;
+    --border-color: #1a252f;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --shadow-hover: rgba(0, 0, 0, 0.4);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+    min-height: 100vh;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.top-section {
+    flex: 1;
+    background: var(--top-bg-color);
+    border-bottom: 4px solid var(--border-color);
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 20px;
+    transition: background-color 0.2s ease;
+}
+
+.top-section.drag-over {
+    background: var(--top-bg-hover);
+}
+
+.bottom-section {
+    flex: 1;
+    background: var(--bottom-bg-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.card-row {
+    display: flex;
+    gap: var(--card-gap);
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+}
+
+.card {
+    width: var(--card-width);
+    height: var(--card-height);
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    cursor: grab;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    user-select: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px var(--shadow-hover);
+}
+
+.card:active {
+    cursor: grabbing;
+}
+
+.card.dragging {
+    opacity: 0.5;
+    transform: scale(1.1);
+}
+
+.card.empty-slot {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    cursor: default;
+}
+
+h1 {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 18px;
+    opacity: 0.8;
+}
